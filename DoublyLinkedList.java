@@ -26,6 +26,32 @@ class DoublyList{
             tail=newNode;
         }
     }
+    public void remove(int data){
+        Node tempHead=head;
+        if(tempHead==null){
+            System.out.println("The list is empty");
+            return;
+        }
+        if(tempHead.data==data)
+        {
+            head=head.next;
+            head.previous=null;
+            return;
+        }
+        while (tempHead!=null && tempHead.data!=data) {
+            tempHead=tempHead.next;
+        }
+        if(tempHead==null){
+            System.out.println(data+" is not exists");
+            return;
+        }
+        if(tempHead.next==null){
+            tempHead.previous.next=null;
+            return;
+        }
+        tempHead.next.previous=tempHead.previous;
+        tempHead.previous.next=tempHead.next;
+    }
     public void displayForward(){
         Node temp=head;
         if (head==null) {
@@ -34,6 +60,19 @@ class DoublyList{
         while (temp!=null) {
             System.out.print(temp.data+" ");
             temp=temp.next;
+        }
+    }
+    public void displaybackward(){
+        Node temp=head;
+        if(temp==null){
+            System.out.println("The list is empty.");
+        }
+        while (temp.next!=null) {
+            temp=temp.next;
+        }
+        while (temp!=null) {
+            System.out.print(temp.data+" ");
+            temp=temp.previous;
         }
     }
 }
@@ -47,5 +86,19 @@ public class DoublyLinkedList {
         doublyList.add(5);
 
         doublyList.displayForward();
+        System.out.println();
+        doublyList.displaybackward();
+        System.out.println();
+        doublyList.remove(1);
+        doublyList.displayForward();
+        System.out.println();
+        doublyList.remove(3);
+        doublyList.displayForward();
+        System.out.println();
+        doublyList.remove(5);
+        doublyList.displayForward();
+        System.out.println();
+        doublyList.remove(6);
+        System.out.println();
     }
 }
