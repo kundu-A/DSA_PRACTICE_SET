@@ -44,7 +44,7 @@ public class MiddleOfList_LinkedList {
         middle.insert(2);
         middle.insert(3);
         middle.insert(4);
-        middle.insert(5);
+        //middle.insert(5);
         middle.displayLinkedList();
         System.out.println();
         System.out.println("Middle of the list is: ");
