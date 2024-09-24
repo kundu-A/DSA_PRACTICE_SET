@@ -56,6 +56,7 @@ class DoublyList{
         Node temp=head;
         if (head==null) {
             System.out.println("The list is empty.");
+            return;
         }
         while (temp!=null) {
             System.out.print(temp.data+" ");
