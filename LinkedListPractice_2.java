@@ -12,6 +12,7 @@ class LinkedList{
     public LinkedList(){
         head=null;
     }
+    Scanner sc=new Scanner(System.in);
     public void add(int data){
         Node newNode=new Node(data);
         if(head==null){
@@ -97,14 +98,14 @@ class LinkedList{
         if(flag==0)
             System.out.println(data+" is not found.");
     }
-    public void measureSize(){
+    public int measureSize(){
         Node temp=head;
         int count=0;
         while (temp!=null) {
             count++;
             temp=temp.next;
         }
-        System.out.println("The size of the list is: "+count);
+        return count;
     }
     public void getFirstAndLastElement(){
         Node temp=head;
@@ -140,6 +141,90 @@ class LinkedList{
         head=null;
         display();
     }
+    public void positionalInsert(int pos , int data){
+        if(head==null){
+            System.out.println("The list is empty.");
+            return;
+        }
+        if(pos==0){
+            System.out.println("Invalid input,please start from 1.");
+            return;
+        }
+        Node newNode=new Node(data);
+        if(pos==1){
+            newNode.next=head;
+            head=newNode;
+            return;
+        }
+        Node temp=head;
+        int c=1;
+        while (temp!=null && c<pos-1) {
+            c++;
+            temp=temp.next;
+        }
+        newNode.next=temp.next;
+        temp.next=newNode;
+    }
+    public void positionalDelete(){
+        if(head==null){
+            System.out.println("List is empty.");
+            return;
+        }
+        System.out.println("Enter a position from where you want to delete: ");
+        int pos=sc.nextInt();
+        if (pos==0) {
+            System.out.println("Invalid input , please start from 1: ");
+            return;
+        }
+        if(pos==1){
+            head=head.next;
+            return;
+        }
+        int lSize=measureSize();
+        if(lSize<pos){
+            System.out.println("List length is: "+lSize+" , Please enter a vaild position to delete");
+            return;
+        }
+        Node temp=head;
+        int c=1;
+        while (temp!=null && c<pos-1) {
+            c++;
+            temp=temp.next;
+        }
+        temp.next=temp.next.next;
+    }
+    public void retriveDataFromPosition(){
+        if (head==null) {
+            System.out.println("The List is empty.");
+            return;
+        }
+        System.out.println("Enter a position ,from where you want to retrive data: ");
+        int pos=sc.nextInt();
+        if (pos==0) {
+            System.out.println("Please enter a valid position (Start from 1).");
+            return;
+        }
+        int lSize=measureSize();
+        if(lSize<pos){
+            System.out.println("List length is: "+lSize+" , Please enter a vaild position to delete");
+            return;
+        }
+        Node temp=head;
+        int c=0;
+        while (temp!=null && c<pos-1) {
+            c++;
+            temp=temp.next;
+        }
+        System.out.println("At "+pos+" position "+temp.data+" is present.");
+    }
+    public boolean isEmpty(){
+        if(head==null){
+           return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
 public class LinkedListPractice_2 {
     public static void main(String[] args) {
@@ -147,7 +232,7 @@ public class LinkedListPractice_2 {
         Scanner sc=new Scanner(System.in);
         int a=0;
         do {
-            System.out.println("Press '1' for adding a data\nPress '2' for removing a data\nPress '3' for display the list\nPress '4' to display in reverse\nPress '5' to search an element\nPress '6' to check the list size\nPress '7' to Get the First and Last element from the list\nPress '8' to get the Middle element from the list\nPress '9' to clear the list: ");
+            System.out.println("Press '1' for adding a data\nPress '2' for removing a data\nPress '3' for display the list\nPress '4' to display in reverse\nPress '5' to search an element\nPress '6' to check the list size\nPress '7' to Get the First and Last element from the list\nPress '8' to get the Middle element from the list\nPress '9' to clear the list\nPress '10' to do positional insert\nPress '11' to do positional delete\nPress '12' to retrive data from a specific position\nPress '13' to check the list is empty or not: ");
             int ch=sc.nextInt();
             switch (ch) {
                 case 1: System.out.println("Enter a data to add to the list: ");
@@ -174,7 +259,8 @@ public class LinkedListPractice_2 {
                         linkedList.searchElement(search);
                 break;
                 
-                case 6: linkedList.measureSize();
+                case 6: int lSize=linkedList.measureSize();
+                        System.out.println("The size of the List is: "+lSize);
                 break;
 
                 case 7: linkedList.getFirstAndLastElement();
@@ -184,6 +270,26 @@ public class LinkedListPractice_2 {
                 break;
 
                 case 9: linkedList.clearList();
+                break;
+
+                case 10: System.out.println("Enter a position where you want to insert a value: ");
+                         int pos=sc.nextInt();
+                         System.out.println("Enter the number: ");
+                         int val=sc.nextInt();
+                         linkedList.positionalInsert(pos, val);
+                break;
+
+                case 11: linkedList.positionalDelete();
+                break;
+
+                case 12: linkedList.retriveDataFromPosition();
+                break;
+
+                case 13: boolean check=linkedList.isEmpty();
+                         if(check==true)
+                            System.out.println("The List is empty.");
+                         else
+                            System.out.println("The list is not empty , size = "+linkedList.measureSize());
                 break;
 
                 default: System.out.println("Please choose the coorect one.");
