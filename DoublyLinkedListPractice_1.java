@@ -144,6 +144,155 @@ class DoublyLinkedList{
         temp.next.previous=newNode;
         temp.next=newNode;
     }
+    public void removeFromBegining(){
+        if (head==null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+        Node temp=head;
+        int c=0;
+        while (temp!=null) {
+            c++;
+            temp=temp.next;
+        }
+        if(c==1){
+            head=null;
+            return;
+        }
+        temp=head;
+        temp.next.previous=null;
+        head=temp.next;
+    }
+    public void postionalRemove(){
+        if (head==null) {
+            System.out.println("The List is empty.");
+            return;
+        }
+        System.out.println("Enter any valid position to remove that data: ");
+        int pos=sc.nextInt();
+        Node temp=head;
+        int lSize=0;
+        while (temp!=null) {
+            lSize++;
+            temp=temp.next;
+        }
+        if (pos>lSize) {
+            System.out.println("The List size is "+lSize+" but the provided position is "+pos);
+            return;
+        }
+        if (pos==1) {
+            removeFromBegining();
+            return;
+        }
+        temp=head;
+        int c=1;
+        while (temp!=null && c<pos-1) {
+            c++;
+            temp=temp.next;
+        }
+        if (temp.next.next==null) {
+            temp.next=null;
+            return;
+        }
+        temp.next=temp.next.next;
+        temp.next.previous=temp;
+    }
+    public void updateValue(){
+        if (head==null) {
+            System.out.println("The List is empty.");
+            return;
+        }
+        System.out.println("Enter that value which you want to update: ");
+        int existVaue=sc.nextInt();
+        System.out.println("Enter the updated value: ");
+        int updatedValue=sc.nextInt();
+        Node temp=head;
+        while (temp!=null && temp.data!=existVaue) {
+            temp=temp.next;
+        }
+        if (temp==null) {
+            System.out.println(existVaue+" is not found.");
+            return;
+        }
+        temp.data=updatedValue;
+    }
+    public void ascendingOrderSorting(){
+
+    }
+    public void decendingOrderSorting(){
+
+    }
+    public void isEmpty(){
+        if (head==null) {
+            System.out.println("The List is empty.");
+            return;
+        }
+        System.out.println("The list is not empty.");
+        getSize();
+    }
+    public void getSize(){
+        if (head==null) {
+            System.out.println("The List is empty.");
+            return;
+        }
+        Node temp=head;
+        int count=0;
+        while (temp!=null) {
+            count++;
+            temp=temp.next;
+        }
+        System.out.println("The size of the list is: "+count);
+    }
+    public void getMiddleValue(){
+        if (head==null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+        Node slow=head;
+        Node fast=head;
+        while (fast!=null && fast.next!=null) {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        System.out.println("The middle element is: "+slow.data);
+    }
+    public void getFirstAndLastValue(){
+        if (head==null) {
+            System.out.println("The List is empty.");
+            return;
+        }
+        Node temp=head;
+        System.out.println("This is First data from the list: "+temp.data);
+        while (temp.next!=null) {
+            temp=temp.next;
+        }
+        System.out.println("This is the Last data fro  the list: "+temp.data);
+    }
+    public void positionalData() {
+       if (head==null) {
+            System.out.println("The list is empty.");
+            return;
+       }
+       System.out.println("Enter the Specific position to retrive the data: ");
+       int pos=sc.nextInt();
+       Node temp=head;
+       int lSize=0;
+       while (temp!=null){
+            lSize++;
+            temp=temp.next;
+       }
+       if (pos>lSize) {
+            System.out.println("The lize of the list is "+lSize+" but the provided position is "+pos);
+            return;
+       }
+       temp=head;
+       int c=1;
+       while (temp!=null && c<pos) {
+            c++;
+            temp=temp.next;
+       }
+       System.out.println("At "+pos+" position "+temp.data+" is present.");
+    }
 }
 public class DoublyLinkedListPractice_1 {
     public static void main(String[] args) {
@@ -151,7 +300,7 @@ public class DoublyLinkedListPractice_1 {
         Scanner sc=new Scanner(System.in);
         int loop=0;
         do {
-            System.out.println("Press '1' to Add Node:\nPress '2' to remove:\nPress '3' to display in a forward way:\nPress '4' to display in backward way:\nPress '5' to search an element:\nPress '6' to insert value at begining\nPress '7' to insert any value position-wise:");
+            System.out.println("Press '1' to Add Node:\nPress '2' to remove:\nPress '3' to display in a forward way:\nPress '4' to display in backward way:\nPress '5' to search an element:\nPress '6' to insert value at begining:\nPress '7' to insert any value position-wise:\nPress '8' to remove from begining:\nPress '9' remove from a specific position:\nPress '10' to update the value of any node:\nPress '11' to sort the list in ascending order:\nPress '12' to sort the list from decending order\nPress '13' to check the list is empty or not\nPress '14' to get the size of the list\nPress '15' to retrive the middle value from the list\nPress '16' to retrive the first and last value from the list:\nPress '17' to retrive data from a specific position:");
             int ch=sc.nextInt();
             switch (ch) {
                 case 1: System.out.println("Enter a data to add: ");
@@ -181,6 +330,36 @@ public class DoublyLinkedListPractice_1 {
                 case 7: doublyLinkedList.positionalInsert();
                 break;
 
+                case 8: doublyLinkedList.removeFromBegining();
+                break;
+
+                case 9: doublyLinkedList.postionalRemove();
+                break;
+                
+                case 10: doublyLinkedList.updateValue();
+                break;
+
+                case 11: doublyLinkedList.ascendingOrderSorting();
+                break;
+
+                case 12: doublyLinkedList.decendingOrderSorting();
+                break; 
+
+                case 13: doublyLinkedList.isEmpty();
+                break; 
+
+                case 14: doublyLinkedList.getSize();
+                break;
+
+                case 15: doublyLinkedList.getMiddleValue();
+                break;
+
+                case 16: doublyLinkedList.getFirstAndLastValue();
+                break;
+
+                case 17: doublyLinkedList.positionalData();
+                break;
+                
                 default: System.out.println("Please choose the right option: ");
                     break;
             }
