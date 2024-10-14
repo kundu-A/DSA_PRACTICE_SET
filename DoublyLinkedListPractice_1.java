@@ -217,10 +217,16 @@ class DoublyLinkedList{
         temp.data=updatedValue;
     }
     public void ascendingOrderSorting(){
-
+        if (head==null) {
+            System.out.println("The list is empty.");
+            return;
+        }
     }
     public void decendingOrderSorting(){
-
+        if (head==null) {
+            System.out.println("The list is empty.");
+            return;
+        }
     }
     public void isEmpty(){
         if (head==null) {
