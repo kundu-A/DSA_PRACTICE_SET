@@ -1,0 +1,11 @@
+Game Concept: 
+In the game a guesser will be there, who guess a number and give it to the Umpire. Then Umpire take a numbers from the Players(suppose 3 Players will participate in the game) and then match those numbers with that number which is provided by the Umpire and if any number will match with the guessed number then that player will be declared as winner , who give that correct number to the Umpire.
+
+In this project I want 3 different classes:
+1. Players - One task = Give their own numbers to the Umpire.
+2. Umpire - Three task = (i) -> Take numbers from Players , (ii)-> Take guessed number from the Guesser , (iii) -> Match that guesses numbers with the Players provided numbers and declare the winner.
+3. Guesser (who guess a number) - One task = Guess a number and that to the Umpire.
+
+Players class will have one method.
+Umpire class will have three method.
+Guesser class will have one method.
