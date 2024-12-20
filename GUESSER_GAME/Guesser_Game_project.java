@@ -1,11 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 class Guesser{
     int guessNumber;
     public int guessANumber(){
-        Scanner sc=new Scanner(System.in);
-        System.out.println("Please Guess a number: ");
-        guessNumber=sc.nextInt();
+        Random random=new Random();
+        guessNumber=random.nextInt(100);
         return guessNumber;
     }
 }
@@ -22,51 +24,30 @@ class Players{
 
 class Umpire{
     int guesserNumber;
-    int playerNumber1;
-    int playerNumber2;
-    int playerNumber3;
-
+    List<Integer> list=new ArrayList<Integer>();
     public void takeNumberFromGuesser(){
         //Take number the Guesser Person.
         Guesser guesser=new Guesser();
         guesserNumber= guesser.guessANumber();
+        System.out.println(guesserNumber);
     }
     public void takeNumberFromPlayers(){
-        //Take number from Player 1.
-        Players player1=new Players();
-        playerNumber1=player1.guessANumber();
-
-        //Take number from Player 2.
-        Players player2=new Players();
-        playerNumber2=player2.guessANumber();
-
-        //Take number from Player 3.
-        Players player3=new Players();
-        playerNumber3=player3.guessANumber();
+        Scanner sc=new Scanner(System.in);
+        Players players=new Players();
+        int a=0;
+        do {
+            list.add(players.guessANumber());
+            System.out.println("If You want to contribute more guess value then press '1' otherwise '0': ");
+            a=sc.nextInt();
+        } while (a==1);
+        sc.close();
     }
     public void compareNumbers(){
-        if(playerNumber1==guesserNumber){
-            if(playerNumber2==guesserNumber && playerNumber3==guesserNumber)
-                System.out.println("All the Players won the Game!!");
-            else if(playerNumber2==guesserNumber)
-                System.out.println("Only Player-1 and Player-2 won the game!!");
-            else if(playerNumber3==guesserNumber)
-                System.out.println("Only Player-1 and Player-3 won the game!!");
-            else
-                System.out.println("Only Player-1 won the game!!");
-        }
-        else if(playerNumber2==guesserNumber){
-            if(playerNumber3==guesserNumber)
-                System.out.println("Only Player-1 and Player-2 won the game!!");
-            else
-                System.out.println("Only Player-2 won the game!!");
-        }
-        else if(playerNumber3==guesserNumber){
-            System.out.println("Only Player-3 won the game!!");
-        }
-        else{
-            System.out.println("No Player won the game!!");
-        }
+        int result=list.indexOf(guesserNumber);
+        if(result==-1)
+            System.out.println("No one will won the game!!\nThe actual number is: "+guesserNumber);
+        else
+            System.out.println("Congradulations!!!\nPlayer no. : "+(result+1)+" won the game!!");
     }
 }
 
